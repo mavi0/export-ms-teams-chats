@@ -140,6 +140,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+          pattern: teams-chat-viewer-*
           merge-multiple: true
 
       - name: List artifacts
