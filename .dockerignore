@@ -1,0 +1,18 @@
+# Build output
+out/
+
+# Dependencies (rebuilt in container)
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# IDE and misc
+.vscode/
+.cursor/
+*.md
+!README.md
+.DS_Store
+.env*
+*.log

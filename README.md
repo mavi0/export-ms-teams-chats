@@ -26,6 +26,20 @@ Compared to other repos or methods that strive to achieve the same goal, [this m
 
 ## Guide
 
+#### Option A: Using Docker
+
+```bash
+# Build the image
+docker build -t export-ms-teams-chats .
+
+# Run (interactive - you'll authenticate via device code in your browser)
+docker run -it -v $(pwd)/out:/app/out export-ms-teams-chats
+```
+
+The exported chats will appear in the `out` folder in your current directory. Mount a different path if you prefer: `-v /path/to/output:/app/out`.
+
+#### Option B: Direct PowerShell
+
 This process will probably take you about **30s** on a Windows system to get running or about **5m** on MacOS or Linux and roughly **20m** of unattended time to export 60 chats.
 
 ### 1. Install PowerShell 7
@@ -43,6 +57,7 @@ See [Microsoft&#39;s guide on installing PowerShell on MacOS](https://learn.micr
 See [Microsoft&#39;s guide on installing PowerShell on Linux](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-linux).
 
 ### 2. Run the Script
+
 
 Open a PowerShell terminal. Type or copy the following into the terminal and hit enter.
 
