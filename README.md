@@ -1,17 +1,22 @@
 # Microsoft Teams Chat Exporter
 
-## Note
-I don't currently use Teams for school nor work. While I have access to a Teams environment for testing, I don't have major incentives to develop new features. There are quite a few forks of this project: these may have new features or capabilities that aren't in mine: https://github.com/evenevan/export-ms-teams-chats/forks. I encourage you to have a look into which may be best for you, but know I have not looked into any of them in depth and can not endorse any of them in particular.
-
 ## Introduction
 
-Export Microsoft Teams messages as **machine-readable JSON**, ready for ingestion by other projects. Despite being both a dominant product and run by a trillion dollar company, Teams doesn't have a native way for end users to export messages for work or school accounts.
+Export Microsoft Teams messages as **machine-readable JSON**. Despite being both a dominant product and run by a trillion dollar company, Teams doesn't have a native way for end users to export messages for work or school accounts.
 
-The repository contains a PowerShell script that fetches your Microsoft Teams chat conversations and exports them to a single JSON file.
+The repository contains:
+
+- **PowerShell script** — fetches your Microsoft Teams chat conversations and exports them to a single JSON file.
+- **Teams Chat Viewer** (`viewer/`) — a cross-platform desktop app (Go + Wails) to browse, search, and navigate the export JSON.
+
 
 ## Important
 
 If you are using Microsoft Teams with a personal Microsoft account, you can simply export your chats and other data with https://go.microsoft.com/fwlink/?linkid=2128346. This guide is for people using Microsoft Teams with work or school accounts.
+
+## Releases
+
+Pre-built binaries for the Teams Chat Viewer are available on [GitHub Releases](https://github.com/mavi0/export-ms-teams-chats/releases) for Windows, macOS (Apple Silicon), and Linux. Download the archive for your platform, extract it, and run `teams-chat-viewer` (or `teams-chat-viewer.exe` on Windows).
 
 ## Output Format
 
@@ -72,20 +77,21 @@ The export produces a JSON file with the following structure:
 
 #### Option A: Using Docker
 
-```bash
-# Build the image
-docker build -t export-ms-teams-chats .
+Pull and run the image from GitHub Container Registry:
 
+```bash
 # Run (interactive - you'll authenticate via device code in your browser)
-docker run -it -v $(pwd)/out:/app/out export-ms-teams-chats
+docker run -it -v $(pwd)/out:/app/out ghcr.io/mavi0/export-ms-teams-chats:latest
 ```
 
 The export file `teams-export.json` and `assets/` folder will appear in the `out` folder. Mount a different path if you prefer: `-v /path/to/output:/app/out`.
 
 Custom output file:
 ```bash
-docker run -it -v $(pwd)/out:/app/out export-ms-teams-chats -outputFile my-chats.json
+docker run -it -v $(pwd)/out:/app/out ghcr.io/mavi0/export-ms-teams-chats:latest -outputFile my-chats.json
 ```
+
+Tagged releases (e.g. `v1.0.0`) are also published. Use `ghcr.io/mavi0/export-ms-teams-chats:v1.0.0` to pin a specific version.
 
 #### Option B: Direct PowerShell
 
@@ -144,7 +150,7 @@ Example with parameters:
 
 ## Credit
 
-Based on improvements to a [pull request by olljanat](https://github.com/olljanat/MSTeamsChatExporter) on a repository by [telstrapurple](https://github.com/telstrapurple/MSTeamsChatExporter).
+Based on a fork of [eveneven](https://github.com/evenevan/export-ms-teams-chats)'s repository which was an improvement on [pull request by olljanat](https://github.com/olljanat/MSTeamsChatExporter) on a repository by [telstrapurple](https://github.com/telstrapurple/MSTeamsChatExporter).
 
 ## Disclaimer
 
