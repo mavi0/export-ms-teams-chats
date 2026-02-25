@@ -1,0 +1,36 @@
+{
+  "name": "Teams Chat Viewer (Wails)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.22",
+      "installGoTools": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts",
+      "nodeGypDependencies": true
+    }
+  },
+  "postCreateCommand": "go install github.com/wailsapp/wails/v2/cmd/wails@latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "dbaeumer.vscode-eslint",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [34115],
+  "portsAttributes": {
+    "34115": {
+      "label": "Wails dev server",
+      "onAutoForward": "silent"
+    }
+  },
+  "remoteUser": "vscode"
+}
